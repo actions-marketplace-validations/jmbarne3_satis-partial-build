@@ -1,4 +1,4 @@
-name: 'Partial Satis Build'
+name: 'Satis Partial Build'
 description: 'Partially builds a composer repository using satis'
 
 inputs:

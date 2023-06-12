@@ -26,10 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: UCF/satis-partial-build@v1
+      - uses: jmbarne3/satis-partial-build@v1
         with:
           token: ${{ GITHUB_TOKEN }} # App/OAuth token, PAT
-          package: ${{ intputs.package }}
+          package: ${{ intputs.package_name }}
       - env:
           GIT_EMAIL: bot@github.com
           GIT_NAME: cool-bot
