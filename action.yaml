@@ -1,0 +1,33 @@
+name: 'Partial Satis Build'
+description: 'Partially builds a composer repository using satis'
+
+inputs:
+  token:
+    description: 'Token to use (i.e. GITHUB_TOKEN, App token or a PAT)'
+    required: true
+  package_name:
+    description: 'The package to rebuild, i.e. `ucf/online-child-theme`.'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - env:
+        COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ inputs.token }}"}}'
+        COMPOSER_HOME: /tmp/.satis-build
+      run: |
+        mkdir /tmp/.satis-build
+        echo "{}" > /tmp/.satis-build/composer.json
+        composer global config --no-plugins allow-plugins.composer/satis true
+        composer g require composer/satis:dev-main --prefer-dist \
+          --no-cache --no-progress --no-interaction -o \
+          --ignore-platform-reqs
+        php $COMPOSER_HOME/vendor/bin/satis build ./satis.json docs ${{ inputs.package_name }} -n
+      shell: bash
+    - run: |
+        rm -rf $COMPOSER_HOME
+      shell: bash
+
+branding:
+  icon: 'download-cloud'
+  color: 'gray-dark'
