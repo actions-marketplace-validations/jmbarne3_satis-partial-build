@@ -6,7 +6,7 @@ Used for partially building your own composer repository using [composer/satis](
 | Input        | Description                                                                                             | Required                     |
 |--------------|---------------------------------------------------------------------------------------------------------|------------------------------|
 | token        | GitHub token that will be used for composer when invoked by satis.<br/>Currently auth is static for "github-oauth" | Yes                          |
-| package      | The name of the package to rebuild | Yes |
+| package_name | The name of the package to rebuild | Yes |
 
 ## Outputs
 None
