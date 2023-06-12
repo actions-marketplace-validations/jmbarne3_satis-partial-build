@@ -19,7 +19,11 @@ Example `.github/workflow/satis-partial-build.yaml`
 name: Satis Partial Build
 
 on:
-  - workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      package_name:
+        type: string
+        description: Name of the package to update
 
 jobs:
   build:
